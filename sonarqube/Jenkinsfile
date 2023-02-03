@@ -9,15 +9,17 @@ node {
 
     stage('build') {
         myNodeContainer.inside {
-            sh 'npm install --only=dev'
-            sh 'npm test'
+      sh 'npm install --only=dev'
+      sh 'npm test'
         }
     }
 
     stage('sonar-scanner') {
+      nodejs(nodeJSInstallationName: 'nodejs') {
         def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
         withCredentials([string(credentialsId: 'sonar', variable: 'sonarLogin')]) {
             sh "${sonarqubeScannerHome}/bin/sonar-scanner -e -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=${sonarLogin} -Dsonar.projectName=express-demo -Dsonar.projectVersion=${env.BUILD_NUMBER} -Dsonar.projectKey=ExpD -Dsonar.sources=./src/ -Dsonar.tests=./test/ -Dsonar.language=JavaScript -Dsonar.java.binaries=."
         }
+      }
     }
 }
