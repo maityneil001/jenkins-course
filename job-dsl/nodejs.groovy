@@ -1,4 +1,4 @@
-job('NodeJS example') {
+job('node-js-api') {
     scm {
         git('https://github.com/maityneil001/express-demo.git') {  node -> // is hudson.plugins.git.GitSCM
             node / gitConfigName('DSL User')
