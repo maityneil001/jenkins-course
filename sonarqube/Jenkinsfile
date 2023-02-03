@@ -9,12 +9,12 @@ node {
 
     stage('build') {
         myNodeContainer.inside {
-      sh 'npm install --only=dev'
+      sh 'npm install'
       sh 'npm test'
         }
     }
 
-    stage('sonar-scanner') { 
+    stage('sonar-scanner') {
       nodejs(nodeJSInstallationName: 'v14') {
         def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
         withCredentials([string(credentialsId: 'sonar', variable: 'sonarLogin')]) {
