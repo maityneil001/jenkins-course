@@ -3,7 +3,7 @@ node {
     myNodeContainer.pull()
 
     stage('prep') {
-        git branch: "main", url: 'https://github.com/maityneil001/express-demo.git'
+        git branch: 'main', url: 'https://github.com/maityneil001/express-demo.git'
         
     }
 
