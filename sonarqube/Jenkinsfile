@@ -9,7 +9,7 @@ node {
 
     stage('build') {
         myNodeContainer.inside {
-      sh 'npm install'
+      sh 'npm install --only=dev'
       sh 'npm test'
         }
     }
